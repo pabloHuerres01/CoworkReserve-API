@@ -1,1 +1,10 @@
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/CoworkreserveApplication.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/HelloController.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/EspacioController.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/UsuarioController.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/model/Espacio.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/model/Reserva.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/model/Usuario.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/repository/EspacioRepository.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/repository/ReservaRepository.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/repository/UsuarioRepository.java
