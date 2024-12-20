@@ -1,0 +1,44 @@
+-- Crear tabla Usuario
+CREATE TABLE usuario (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Crear tabla Espacio
+CREATE TABLE espacio (
+    id SERIAL PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    capacidad INTEGER NOT NULL,
+    ubicacion VARCHAR(100) NOT NULL
+);
+
+-- Crear tabla Reserva
+CREATE TABLE reserva (
+    id SERIAL PRIMARY KEY,
+    usuario_id INTEGER NOT NULL REFERENCES usuario(id) ON DELETE CASCADE,
+    espacio_id INTEGER NOT NULL REFERENCES espacio(id) ON DELETE CASCADE,
+    fecha_inicio TIMESTAMP NOT NULL,
+    fecha_fin TIMESTAMP NOT NULL
+);
+
+-- Insertar datos de prueba en la tabla Usuario
+INSERT INTO usuario (nombre, email) VALUES 
+('Juan Pérez', 'juan@example.com'),
+('Ana García', 'ana@example.com'),
+('María López', 'maria@example.com'),
+('Carlos Martínez', 'carlos@example.com');
+
+-- Insertar datos de prueba en la tabla Espacio
+INSERT INTO espacio (nombre, capacidad, ubicacion) VALUES 
+('Sala de Conferencias', 20, 'Barcelona'),
+('Oficina Abierta', 15, 'Madrid'),
+('Zona Creativa', 10, 'Sevilla'),
+('Coworking Espacio Libre', 25, 'Valencia');
+
+-- Insertar datos de prueba en la tabla Reserva
+INSERT INTO reserva (usuario_id, espacio_id, fecha_inicio, fecha_fin) VALUES 
+(1, 1, '2024-12-20 10:00:00', '2024-12-20 12:00:00'),
+(2, 2, '2024-12-21 14:00:00', '2024-12-21 16:00:00'),
+(3, 3, '2024-12-22 09:00:00', '2024-12-22 11:00:00'),
+(4, 4, '2024-12-23 15:00:00', '2024-12-23 17:00:00');
