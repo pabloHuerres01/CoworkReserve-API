@@ -1,22 +1,43 @@
 package com.example.coworkreserve.controller;
 
+import com.example.coworkreserve.model.Usuario;
+import com.example.coworkreserve.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
 
+    private final UsuarioRepository usuarioRepository;
+
+    public AuthController(UsuarioRepository usuarioRepository) {
+        this.usuarioRepository = usuarioRepository;
+    }
+
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
-        if ("usuario@example.com".equals(loginRequest.getEmail()) && "password123".equals(loginRequest.getPassword())) {
-            String token = "token-generado"; // Aquí puedes generar un JWT real
+        System.out.println("Email recibido: " + loginRequest.getEmail());
+        System.out.println("Password recibido: " + loginRequest.getPassword());
+
+        Optional<Usuario> usuario = usuarioRepository.findByEmailAndPassword(
+                loginRequest.getEmail(),
+                loginRequest.getPassword()
+        );
+
+        if (usuario.isPresent()) {
+            System.out.println("Usuario encontrado: " + usuario.get().getEmail());
+            String token = "token-generado";
             return ResponseEntity.ok(new LoginResponse(token));
         } else {
+            System.out.println("Credenciales inválidas");
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
         }
     }
+
 
     public static class LoginRequest {
         private String email;
@@ -47,7 +68,6 @@ public class AuthController {
             this.token = token;
         }
 
-        // Getter
         public String getToken() {
             return token;
         }

@@ -15,3 +15,4 @@ com/example/coworkreserve/repository/UsuarioRepository.class
 com/example/coworkreserve/controller/AuthController$LoginRequest.class
 com/example/coworkreserve/repository/EspacioRepository.class
 com/example/coworkreserve/model/Usuario.class
+com/example/coworkreserve/controller/MainController.class

@@ -3,6 +3,7 @@
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/WebConfig.java
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/AuthController.java
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/EspacioController.java
+/home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/MainController.java
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/ReservaController.java
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/controller/UsuarioController.java
 /home/pablo/Proyectos/CoworkReserve-API/src/main/java/com/example/coworkreserve/exception/GlobalExceptionHandler.java
