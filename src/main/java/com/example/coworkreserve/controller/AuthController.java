@@ -4,6 +4,8 @@ import com.example.coworkreserve.model.Usuario;
 import com.example.coworkreserve.repository.UsuarioRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -13,29 +15,29 @@ import java.util.Optional;
 public class AuthController {
 
     private final UsuarioRepository usuarioRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public AuthController(UsuarioRepository usuarioRepository) {
         this.usuarioRepository = usuarioRepository;
+        this.passwordEncoder = new BCryptPasswordEncoder(); // Instancia de BCrypt
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         System.out.println("Email recibido: " + loginRequest.getEmail());
-        System.out.println("Password recibido: " + loginRequest.getPassword());
+        System.out.println("Contraseña recibida: " + loginRequest.getPassword());
 
-        Optional<Usuario> usuario = usuarioRepository.findByEmailAndPassword(
-                loginRequest.getEmail(),
-                loginRequest.getPassword()
-        );
+        Optional<Usuario> usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
 
         if (usuario.isPresent()) {
-            System.out.println("Usuario encontrado: " + usuario.get().getEmail());
-            String token = "token-generado";
-            return ResponseEntity.ok(new LoginResponse(token));
-        } else {
-            System.out.println("Credenciales inválidas");
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+            System.out.println("Hash en la base de datos: " + usuario.get().getPasswordHash());
+            if (passwordEncoder.matches(loginRequest.getPassword(), usuario.get().getPasswordHash())) {
+                String token = "token-generado"; // Generar un token real si es necesario
+                return ResponseEntity.ok(new LoginResponse(token));
+            }
         }
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.coworkreserve.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,7 +15,9 @@ public class Usuario {
 
     private String nombre;
     private String email;
-    private String password; // Nueva columna
+
+    @Column(name = "password_hash") // Mapeo de la columna password_hash
+    private String passwordHash;
 
     // Getters y Setters
     public Long getId() {
@@ -41,11 +44,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 }
